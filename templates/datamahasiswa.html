@@ -38,18 +38,14 @@
           </tr>
         </thead>
         <tbody>
+          {% for baris in jumlahData %}
           <tr>
-            <td>Nama</td>
-            <td>NIM</td>
-            <td>Alamat</td>
+            <td>{{ baris.0 }}</td>
+            <td>{{ baris.1 }}</td>
+            <td>{{ baris.2 }}</td>
             <td>Hapus Edit</td>
           </tr>
-          <tr>
-            <td>Nama</td>
-            <td>NIM</td>
-            <td>Alamat</td>
-            <td>Hapus Edit</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
