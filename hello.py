@@ -9,4 +9,8 @@ def index():
 
     return render_template('index.html')
 
+@app.route('/datamahasiswa')
+def data_mahasiswa():
+    return render_template('datamahasiswa.html')
+
 app.run(host='localhost', port=5000, debug=True)
