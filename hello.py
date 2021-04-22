@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -26,5 +26,16 @@ def data_mahasiswa():
     jumlah = cursor.fetchall()
     cursor.close()
     return render_template('datamahasiswa.html', jumlahData=jumlah)
+
+@app.route('/simpan', methods = ['POST'])
+def simpan_data():
+    cursor = mysql.connection.cursor()
+    nama = request.form['nama']
+    nim = request.form['nim']
+    alamat = request.form['alamat']
+    cursor.execute('''INSERT INTO data_mahasiswa VALUES (%s,%s,%s)''', (nama,nim,alamat,))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for('data_mahasiswa'))
 
 app.run(host='localhost', port=5000, debug=True)
