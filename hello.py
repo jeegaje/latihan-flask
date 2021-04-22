@@ -21,6 +21,10 @@ def index():
 
 @app.route('/datamahasiswa')
 def data_mahasiswa():
-    return render_template('datamahasiswa.html')
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * FROM data_mahasiswa''')
+    jumlah = cursor.fetchall()
+    cursor.close()
+    return render_template('datamahasiswa.html', jumlahData=jumlah)
 
 app.run(host='localhost', port=5000, debug=True)
