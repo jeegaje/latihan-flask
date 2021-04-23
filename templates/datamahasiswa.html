@@ -43,7 +43,10 @@
             <td>{{ baris.0 }}</td>
             <td>{{ baris.1 }}</td>
             <td>{{ baris.2 }}</td>
-            <td>Hapus Edit</td>
+            <td>
+              <a class="btn btn-danger" href="/hapus/{{ baris.1 }}" role="button">Hapus</a>
+              <a class="btn btn-warning" href="#" role="button">Edit</a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
@@ -51,12 +54,12 @@
 
 
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formTambah">
         Tambah Data Mahasiswa
       </button>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="formTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
