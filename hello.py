@@ -38,4 +38,11 @@ def simpan_data():
     cursor.close()
     return redirect(url_for('data_mahasiswa'))
 
+@app.route('/hapus/<string:nim>')
+def hapus_data(nim):
+    cursor = mysql.connection.cursor()
+    cursor.execute('''DELETE FROM data_mahasiswa WHERE nim=%s''', (nim,))
+    mysql.connection.commit()
+    return redirect(url_for('data_mahasiswa'))
+
 app.run(host='localhost', port=5000, debug=True)
