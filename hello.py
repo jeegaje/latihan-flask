@@ -45,4 +45,15 @@ def hapus_data(nim):
     mysql.connection.commit()
     return redirect(url_for('data_mahasiswa'))
 
+@app.route('/update', methods=['POST'])
+def update_data():
+    cursor = mysql.connection.cursor()
+    nama = request.form['nama']
+    nim = request.form['nim']
+    alamat = request.form['alamat']
+    cursor.execute('''UPDATE data_mahasiswa SET nama=%s, alamat=%s WHERE nim=%s''', (nama,alamat,nim))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for('data_mahasiswa'))
+
 app.run(host='localhost', port=5000, debug=True)
