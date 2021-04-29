@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+  <title>latihan-flask | Data Mahasiswa</title>
+{% endblock %}
+
+{% block body %}
+<!-- Tabel Data Mahasiswa -->
+<div class="container">
+  <br><br>
+  <h1>Data Mahasiswa</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">NAMA</th>
+        <th scope="col">NIM</th>
+        <th scope="col">ALAMAT</th>
+        <th scope="col">HAPUS EDIT</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for baris in jumlahData %}
+      <tr>
+        <td>{{ baris.0 }}</td>
+        <td>{{ baris.1 }}</td>
+        <td>{{ baris.2 }}</td>
+        <td>
+          <a class="btn btn-danger" href="/hapus/{{ baris.1 }}" role="button">Hapus</a>
+          <a class="btn btn-warning" href="/update" role="button" data-bs-toggle="modal" data-bs-target="#formUpdate{{ baris.1 }}">Edit</a>
+        </td>
+      </tr>
+
+  <!-- Modal Tambah Mahasiswa-->
+  <div class="modal fade" id="formTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/simpan" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Nama</label>
+              <input type="text" class="form-control" name="nama">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">NIM</label>
+              <input type="text" class="form-control" name="nim">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Alamat</label>
+              <input type="text" class="form-control" name="alamat">
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Edit Data-->
+  <div class="modal fade" id="formUpdate{{ baris.1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Form Edit Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/update" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Nama</label>
+              <input type="text" class="form-control" name="nama" value="{{ baris.0 }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">NIM</label>
+              <input type="text" readonly class="form-control" name="nim" value="{{ baris.1 }}">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Alamat</label>
+              <input type="text" class="form-control" name="alamat" value="{{ baris.2 }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+<!-- Button Tambah Data -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formTambah">
+  Tambah Data Mahasiswa
+</button>
+
+</div>
+{% endblock %}
