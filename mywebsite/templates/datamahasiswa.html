@@ -25,8 +25,8 @@
         <td>{{ baris.1 }}</td>
         <td>{{ baris.2 }}</td>
         <td>
-          <a class="btn btn-danger" href="/hapus/{{ baris.1 }}" role="button">Hapus</a>
-          <a class="btn btn-warning" href="/update" role="button" data-bs-toggle="modal" data-bs-target="#formUpdate{{ baris.1 }}">Edit</a>
+          <a class="btn btn-danger" href="datamahasiswa/hapus/{{ baris.1 }}" role="button">Hapus</a>
+          <a class="btn btn-warning" href="/datamahasiswa/update" role="button" data-bs-toggle="modal" data-bs-target="#formUpdate{{ baris.1 }}">Edit</a>
         </td>
       </tr>
 
@@ -39,7 +39,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/simpan" method="POST">
+          <form action="/datamahasiswa/simpan" method="POST">
             <div class="mb-3">
               <label class="form-label">Nama</label>
               <input type="text" class="form-control" name="nama">
@@ -71,7 +71,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/update" method="POST">
+          <form action="/datamahasiswa/update" method="POST">
             <div class="mb-3">
               <label class="form-label">Nama</label>
               <input type="text" class="form-control" name="nama" value="{{ baris.0 }}">

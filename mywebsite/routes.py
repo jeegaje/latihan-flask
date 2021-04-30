@@ -1,11 +1,8 @@
 from flask import request, render_template, redirect, url_for
 from mywebsite import app, mysql
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/',)
 def index():
-    if request.method == "POST":
-        return render_template('index.html')
-
     return render_template('index.html')
 
 @app.route('/datamahasiswa')
@@ -16,7 +13,7 @@ def data_mahasiswa():
     cursor.close()
     return render_template('datamahasiswa.html', jumlahData=jumlah)
 
-@app.route('/simpan', methods = ['POST'])
+@app.route('/datamahasiswa/simpan', methods = ['POST'])
 def simpan_data():
     cursor = mysql.connection.cursor()
     nama = request.form['nama']
@@ -27,14 +24,14 @@ def simpan_data():
     cursor.close()
     return redirect(url_for('data_mahasiswa'))
 
-@app.route('/hapus/<string:nim>')
+@app.route('/datamahasiswa/hapus/<string:nim>')
 def hapus_data(nim):
     cursor = mysql.connection.cursor()
     cursor.execute('''DELETE FROM data_mahasiswa WHERE nim=%s''', (nim,))
     mysql.connection.commit()
     return redirect(url_for('data_mahasiswa'))
 
-@app.route('/update', methods=['POST'])
+@app.route('/datamahasiswa/update', methods=['POST'])
 def update_data():
     cursor = mysql.connection.cursor()
     nama = request.form['nama']
