@@ -9,9 +9,9 @@ def index():
 def data_mahasiswa():
     cursor = mysql.connection.cursor()
     cursor.execute('''SELECT * FROM data_mahasiswa''')
-    jumlah = cursor.fetchall()
+    data = cursor.fetchall()
     cursor.close()
-    return render_template('datamahasiswa.html', jumlahData=jumlah)
+    return render_template('datamahasiswa.html', data=data)
 
 @app.route('/datamahasiswa/simpan', methods = ['POST'])
 def simpan_data():
