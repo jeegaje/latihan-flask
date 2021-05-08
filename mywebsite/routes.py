@@ -7,7 +7,7 @@ def index():
 
 @app.route('/datamahasiswa')
 def data_mahasiswa():
-    cursor = mysql.connection.cursor()
+    cursor = mysql.get_db().cursor()
     cursor.execute('''SELECT * FROM data_mahasiswa''')
     data = cursor.fetchall()
     cursor.close()
@@ -15,7 +15,7 @@ def data_mahasiswa():
 
 @app.route('/datamahasiswa/simpan', methods = ['POST'])
 def simpan_data():
-    cursor = mysql.connection.cursor()
+    cursor = mysql.get_db().cursor()
     nama = request.form['nama']
     nim = request.form['nim']
     alamat = request.form['alamat']
@@ -26,14 +26,14 @@ def simpan_data():
 
 @app.route('/datamahasiswa/hapus/<string:nim>')
 def hapus_data(nim):
-    cursor = mysql.connection.cursor()
+    cursor = mysql.get_db().cursor()
     cursor.execute('''DELETE FROM data_mahasiswa WHERE nim=%s''', (nim,))
     mysql.connection.commit()
     return redirect(url_for('data_mahasiswa'))
 
 @app.route('/datamahasiswa/update', methods=['POST'])
 def update_data():
-    cursor = mysql.connection.cursor()
+    cursor = mysql.get_db().cursor()
     nama = request.form['nama']
     nim = request.form['nim']
     alamat = request.form['alamat']

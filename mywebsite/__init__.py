@@ -1,15 +1,15 @@
 from flask import Flask
-from flask_mysqldb import MySQL
+from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'jeegaje123'
-app.config['MYSQL_DB'] = 'flask'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_UNIX_SOCKET'] = '/opt/lampp/var/mysql/mysql.sock'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'jeegaje123'
+app.config['MYSQL_DATABASE_DB'] = 'flask'
+app.config['MYSQL_DATABASE_UNIX_SOCKET'] = '/opt/lampp/var/mysql/mysql.sock'
 
-mysql = MySQL(app)
+mysql = MySQL()
+mysql.init_app(app)
 
 from mywebsite import routes
