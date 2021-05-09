@@ -1,9 +1,22 @@
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect, url_for, flash
 from mywebsite import app, mysql
+from .form import RegistrationForm
 
 @app.route('/',)
 def index():
     return render_template('index.html')
+
+@app.route('/login',)
+def login():
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit ():
+        flash(f'Anda Berhasil Register {form.username.data} !', 'success')
+        return redirect(url_for('index'))
+    return render_template('register.html', form=form, title='Register')
 
 @app.route('/datamahasiswa')
 def data_mahasiswa():
