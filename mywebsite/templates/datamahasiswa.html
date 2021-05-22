@@ -21,12 +21,12 @@
     <tbody>
       {% for baris in data %}
       <tr>
-        <td>{{ baris.0 }}</td>
-        <td>{{ baris.1 }}</td>
-        <td>{{ baris.2 }}</td>
+        <td>{{ baris.nama }}</td>
+        <td>{{ baris.nim }}</td>
+        <td>{{ baris.alamat }}</td>
         <td>
-          <a class="btn btn-danger" href="datamahasiswa/hapus/{{ baris.1 }}" role="button">Hapus</a>
-          <a class="btn btn-warning" href="/datamahasiswa/update" role="button" data-bs-toggle="modal" data-bs-target="#formUpdate{{ baris.1 }}">Edit</a>
+          <a class="btn btn-danger" href="datamahasiswa/hapus/{{ baris.id }}" role="button">Hapus</a>
+          <a class="btn btn-warning" href="/datamahasiswa/update/{{ baris.id }}" role="button" data-bs-toggle="modal" data-bs-target="#formUpdate{{ baris.id }}">Edit</a>
         </td>
       </tr>
 
@@ -63,7 +63,7 @@
   </div>
 
   <!-- Modal Edit Data-->
-  <div class="modal fade" id="formUpdate{{ baris.1 }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="formUpdate{{ baris.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -71,18 +71,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/datamahasiswa/update" method="POST">
+          <form action="/datamahasiswa/update/{{ baris.id }}" method="POST">
             <div class="mb-3">
               <label class="form-label">Nama</label>
-              <input type="text" class="form-control" name="nama" value="{{ baris.0 }}">
+              <input type="text" class="form-control" name="nama" value="{{ baris.nama }}">
             </div>
             <div class="mb-3">
               <label class="form-label">NIM</label>
-              <input type="text" readonly class="form-control" name="nim" value="{{ baris.1 }}">
+              <input type="text" class="form-control" name="nim" value="{{ baris.nim }}">
             </div>
             <div class="mb-3">
               <label class="form-label">Alamat</label>
-              <input type="text" class="form-control" name="alamat" value="{{ baris.2 }}">
+              <input type="text" class="form-control" name="alamat" value="{{ baris.alamat }}">
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
           </form>
