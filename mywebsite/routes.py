@@ -1,55 +1,7 @@
 from flask import request, render_template, redirect, url_for, flash, jsonify, make_response
 from mywebsite import app, db
 from .form import RegistrationForm
-from marshmallow import fields
-from marshmallow_sqlalchemy import ModelSchema
-
-dataMahasiswa = [
-    {
-        "nama" : "Angga Jiyan",
-        "nim" : "123001",
-        "alamat" : "Sidoarjo, Jawa Timur"
-    },
-    {
-        "nama" : "Fajar Chandra",
-        "nim" : "123002",
-        "alamat" : "Malang, Jawa Timur"
-    },
-    {
-        "nama" : "Naufal Tamaam",
-        "nim" : "123003",
-        "alamat" : "Gresik, Jawa Timur"
-    }
-]
-
-class dataMahasiswa(db.Model):
-   __tablename__ = "data_mahasiswa_baru"
-   id = db.Column(db.Integer, primary_key=True)
-   nama = db.Column(db.String(20))
-   alamat = db.Column(db.String(80))
-   nim = db.Column(db.String(20))
-
-   def create(self):
-       db.session.add(self)
-       db.session.commit()
-       return self
-
-   def __init__(self, nama, alamat, nim):
-       self.nama = nama
-       self.alamat = alamat
-       self.nim = nim
-
-   def __repr__(self):
-       return f"{self.id}"
-
-class DataMahasiswaSchema(ModelSchema):
-   class Meta(ModelSchema.Meta):
-       model = dataMahasiswa
-       sqla_session = db.session
-   id = fields.Number(dump_only=True)
-   nama = fields.String(required=True)
-   alamat = fields.String(required=True)
-   nim = fields.String(required=True)
+from .models import dataMahasiswa, DataMahasiswaSchema
 
 @app.route('/',)
 def index():
