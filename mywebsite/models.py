@@ -6,9 +6,9 @@ from marshmallow_sqlalchemy import ModelSchema
 class dataMahasiswa(db.Model):
    __tablename__ = "data_mahasiswa_baru"
    id = db.Column(db.Integer, primary_key=True)
-   nama = db.Column(db.String(20))
+   nama = db.Column(db.String(50))
    alamat = db.Column(db.String(80))
-   nim = db.Column(db.String(20))
+   nim = db.Column(db.String(20), unique=True)
 
    def create(self):
        db.session.add(self)
@@ -22,6 +22,18 @@ class dataMahasiswa(db.Model):
 
    def __repr__(self):
        return f"{self.id}"
+
+class dataLogin(db.Model):
+   __tablename__ = "data_login"
+   id = db.Column(db.Integer, primary_key=True)
+   username = db.Column(db.String(40))
+   email = db.Column(db.String(120))
+   password = db.Column(db.String(150))
+
+   def __repr__(self):
+       return f"{self.id}"
+
+db.create_all()
 
 class DataMahasiswaSchema(ModelSchema):
    class Meta(ModelSchema.Meta):
