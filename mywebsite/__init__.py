@@ -2,6 +2,8 @@ from flask import Flask
 from flaskext.mysql import MySQL
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+from sqlalchemy.ext.automap import automap_base
 
 app = Flask(__name__)
 
@@ -22,5 +24,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+Base = automap_base()
+Base.prepare(db.engine, reflect=True)
+
+login_manager.login_view = 'login'
+login_manager.login_message = "Anda tidak dapat mengakses halaman tersebut! Login terlebih dahulu!"
+login_manager.login_message_category = "danger"
 
 from mywebsite import routes
